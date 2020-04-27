@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true,
+        ".git": true,
+        ".vscode": true,
+        ".gitignore": true,
+        ".gitpod.yml": true,
+        "pom.xml": true,
+        "target": true
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
+}
