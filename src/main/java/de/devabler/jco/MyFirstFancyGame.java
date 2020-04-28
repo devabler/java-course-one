@@ -22,18 +22,7 @@ public class MyFirstFancyGame {
             textGraphics.putString(playerCol, playerRow, " -/\\- ");
 
             KeyStroke input = screen.pollInput();
-            if (input != null) {
-                switch (input.getKeyType()) {
-                    case ArrowLeft:
-                        playerCol = playerCol - 1;
-                        break;
-                    case ArrowRight:
-                        playerCol = playerCol + 1;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            playerCol += getPlayerMovement(input);
             if(input != null && input.getKeyType() == KeyType.Escape) {
                 break;
             }
@@ -42,5 +31,19 @@ public class MyFirstFancyGame {
             screen.refresh();
             Thread.sleep(1000 / 10);
         }
+    }
+
+    int getPlayerMovement(KeyStroke input) {
+        if (input != null) {
+            switch (input.getKeyType()) {
+                case ArrowLeft:
+                    return - 1;
+                case ArrowRight:
+                    return + 1;
+                default:
+                    break;
+            }
+        }
+        return 0;
     }
 }
