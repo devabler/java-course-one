@@ -38,15 +38,11 @@ public class MyFirstFancyGame {
             opponentCol = Math.min(terminalSize.getColumns()-7, Math.max(-1, opponentCol));
 
             if(input != null && input.getKeyType() == KeyType.ArrowUp && playerBullet == null) {
-                playerBullet = new Bullet();
-                playerBullet.column = playerCol + 3;
-                playerBullet.row = playerRow - 1;
+                playerBullet = new Bullet(playerCol + 3, playerRow - 1);
             }
 
             if(playerBullet != null) {
-                textGraphics.putString(playerBullet.column, playerBullet.row, "I");
-                textGraphics.putString(playerBullet.column, playerBullet.row + 1, " ");
-                playerBullet.row -= 1;
+                playerBullet.drawBullet(textGraphics);
                 if(playerBullet.row < -1) {
                     playerBullet = null;
                 }
