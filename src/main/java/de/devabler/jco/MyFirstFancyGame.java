@@ -22,6 +22,8 @@ public class MyFirstFancyGame {
         int opponentDirection = 0;
         int opponentCol = terminalSize.getColumns() / 2 - 4;
 
+        Bullet playerBullet = null;
+
         while (true) {
 
             textGraphics.putString(playerCol, playerRow, " -/\\- ");
@@ -34,6 +36,21 @@ public class MyFirstFancyGame {
 
             playerCol = Math.min(terminalSize.getColumns()-5, Math.max(-1, playerCol));
             opponentCol = Math.min(terminalSize.getColumns()-7, Math.max(-1, opponentCol));
+
+            if(input != null && input.getKeyType() == KeyType.ArrowUp && playerBullet == null) {
+                playerBullet = new Bullet();
+                playerBullet.column = playerCol + 3;
+                playerBullet.row = playerRow - 1;
+            }
+
+            if(playerBullet != null) {
+                textGraphics.putString(playerBullet.column, playerBullet.row, "I");
+                textGraphics.putString(playerBullet.column, playerBullet.row + 1, " ");
+                playerBullet.row -= 1;
+                if(playerBullet.row < -1) {
+                    playerBullet = null;
+                }
+            }
 
             if(input != null && input.getKeyType() == KeyType.Escape) {
                 break;
