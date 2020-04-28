@@ -31,6 +31,10 @@ public class MyFirstFancyGame {
             playerCol += getPlayerMovement(input);
             opponentDirection = getOpponentDirection(opponentDirection);
             opponentCol += opponentDirection;
+
+            playerCol = Math.min(terminalSize.getColumns()-5, Math.max(-1, playerCol));
+            opponentCol = Math.min(terminalSize.getColumns()-7, Math.max(-1, opponentCol));
+
             if(input != null && input.getKeyType() == KeyType.Escape) {
                 break;
             }
