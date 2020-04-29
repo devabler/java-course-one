@@ -16,4 +16,8 @@ public class Bullet {
         textGraphics.putString(column, row + 1, " ");
         row -= 1;
     }
+
+    public boolean hasHit(Spaceship opponent) {
+        return row + 1 == opponent.row && column > opponent.col && column < opponent.col + opponent.avatar.length() - 1;
+    }
 }

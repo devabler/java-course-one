@@ -23,6 +23,7 @@ public class MyFirstFancyGame {
         Spaceship opponent = new Spaceship(terminalSize, 0, " >-\\/-< ");
 
         Bullet playerBullet = null;
+        int score = 0;
 
         while (true) {
 
@@ -43,7 +44,11 @@ public class MyFirstFancyGame {
 
             if(playerBullet != null) {
                 playerBullet.drawBullet(textGraphics);
-                if(playerBullet.row < -1) {
+                if(playerBullet.hasHit(opponent)) {
+                    opponent.explode(textGraphics);
+                    score += 5;
+                    playerBullet = null;
+                } else if(playerBullet.row < -1) {
                     playerBullet = null;
                 }
             }
@@ -52,6 +57,7 @@ public class MyFirstFancyGame {
                 break;
             }
 
+            textGraphics.putString(0, 0, String.valueOf(score));
             while(screen.pollInput() != null);
             screen.refresh();
             Thread.sleep(1000 / 10);

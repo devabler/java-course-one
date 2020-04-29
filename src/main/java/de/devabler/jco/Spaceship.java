@@ -24,4 +24,12 @@ class Spaceship {
         col += direction;
         col = Math.min(terminalSize.getColumns() - avatar.length() + 1, Math.max(-1, col));
     }
+
+	public void explode(TextGraphics textGraphics) {
+        String explosion = "";
+        for(int i = 0; i < avatar.length() - 2; i++) {
+            explosion = explosion + "X";
+        }
+        textGraphics.putString(col + 1, row, explosion);
+	}
 }
