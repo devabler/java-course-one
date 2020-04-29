@@ -25,6 +25,7 @@ public class MyFirstFancyGame {
         Bullet playerBullet = null;
         Bullet opponentBullet = null;
         int score = 0;
+        int lives = 5;
 
         while (true) {
 
@@ -61,6 +62,7 @@ public class MyFirstFancyGame {
                 opponentBullet.drawBullet(textGraphics);
                 if(opponentBullet.hasHit(player)) {
                     player.explode(textGraphics);
+                    lives--;
                     opponentBullet = null;
                 } else if(opponentBullet.row > player.row + 1) {
                     opponentBullet = null;
@@ -68,6 +70,20 @@ public class MyFirstFancyGame {
             }
 
             if(input != null && input.getKeyType() == KeyType.Escape) {
+                break;
+            }
+
+            textGraphics.putString(terminalSize.getColumns() - 15, 0, "Lives:         ");
+            for(int i = 0; i < lives; i++) {
+                textGraphics.putString(terminalSize.getColumns() - 2 - i, 0, "I");
+            }
+
+            if(lives == 0) {
+                screen.clear();
+                textGraphics.putString(terminalSize.getColumns() / 2 - 10, terminalSize.getRows() / 2, "Game Over");
+                textGraphics.putString(terminalSize.getColumns() / 2 - 10, terminalSize.getRows() / 2 + 1, "Score: " + score);
+                screen.refresh();
+                Thread.sleep(5000);
                 break;
             }
 
