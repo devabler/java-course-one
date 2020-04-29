@@ -23,6 +23,7 @@ public class MyFirstFancyGame {
         Spaceship opponent = new Spaceship(terminalSize, 0, " >-\\/-< ");
 
         Bullet playerBullet = null;
+        Bullet opponentBullet = null;
         int score = 0;
 
         while (true) {
@@ -39,7 +40,7 @@ public class MyFirstFancyGame {
 
 
             if(input != null && input.getKeyType() == KeyType.ArrowUp && playerBullet == null) {
-                playerBullet = new Bullet(player.col + 3, player.row - 1);
+                playerBullet = new Bullet(player.col + 3, player.row - 1, -1);
             }
 
             if(playerBullet != null) {
@@ -50,6 +51,19 @@ public class MyFirstFancyGame {
                     playerBullet = null;
                 } else if(playerBullet.row < -1) {
                     playerBullet = null;
+                }
+            }
+
+            if(opponentBullet == null && new Random().nextInt(100) < 10) {
+                opponentBullet = new Bullet(opponent.col + 4, opponent.row + 1, 1);
+            }
+            if(opponentBullet != null) {
+                opponentBullet.drawBullet(textGraphics);
+                if(opponentBullet.hasHit(player)) {
+                    player.explode(textGraphics);
+                    opponentBullet = null;
+                } else if(opponentBullet.row > player.row + 1) {
+                    opponentBullet = null;
                 }
             }
 
