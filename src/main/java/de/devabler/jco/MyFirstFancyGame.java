@@ -16,8 +16,8 @@ public class MyFirstFancyGame {
     void runGame(Screen screen, TextGraphics textGraphics) throws Exception {
         TerminalSize terminalSize = screen.getTerminalSize();
 
-        int playerCol = terminalSize.getColumns() / 2 - 3;
-        int playerRow = terminalSize.getRows() - 1;
+        
+        Spaceship player = new Spaceship(terminalSize, terminalSize.getRows() - 1, " -/\\- ");
 
         int opponentDirection = 0;
         int opponentCol = terminalSize.getColumns() / 2 - 4;
@@ -26,19 +26,19 @@ public class MyFirstFancyGame {
 
         while (true) {
 
-            textGraphics.putString(playerCol, playerRow, " -/\\- ");
+            player.draw(textGraphics);
             textGraphics.putString(opponentCol, 0, " >-\\/-< ");
 
             KeyStroke input = screen.pollInput();
-            playerCol += getPlayerMovement(input);
+            player.move(getPlayerMovement(input));
+            
             opponentDirection = getOpponentDirection(opponentDirection);
             opponentCol += opponentDirection;
+            opponentCol = Math.min(terminalSize.getColumns() - 7, Math.max(-1, opponentCol));
 
-            playerCol = Math.min(terminalSize.getColumns()-5, Math.max(-1, playerCol));
-            opponentCol = Math.min(terminalSize.getColumns()-7, Math.max(-1, opponentCol));
 
             if(input != null && input.getKeyType() == KeyType.ArrowUp && playerBullet == null) {
-                playerBullet = new Bullet(playerCol + 3, playerRow - 1);
+                playerBullet = new Bullet(player.col + 3, player.row - 1);
             }
 
             if(playerBullet != null) {
