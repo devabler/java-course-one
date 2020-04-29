@@ -20,21 +20,21 @@ public class MyFirstFancyGame {
         Spaceship player = new Spaceship(terminalSize, terminalSize.getRows() - 1, " -/\\- ");
 
         int opponentDirection = 0;
-        int opponentCol = terminalSize.getColumns() / 2 - 4;
+        Spaceship opponent = new Spaceship(terminalSize, 0, " >-\\/-< ");
 
         Bullet playerBullet = null;
 
         while (true) {
 
             player.draw(textGraphics);
-            textGraphics.putString(opponentCol, 0, " >-\\/-< ");
+            opponent.draw(textGraphics);
 
             KeyStroke input = screen.pollInput();
+            
             player.move(getPlayerMovement(input));
             
             opponentDirection = getOpponentDirection(opponentDirection);
-            opponentCol += opponentDirection;
-            opponentCol = Math.min(terminalSize.getColumns() - 7, Math.max(-1, opponentCol));
+            opponent.move(opponentDirection);
 
 
             if(input != null && input.getKeyType() == KeyType.ArrowUp && playerBullet == null) {
