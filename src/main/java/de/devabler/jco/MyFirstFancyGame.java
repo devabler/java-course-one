@@ -20,7 +20,7 @@ public class MyFirstFancyGame {
         Spaceship player = new Spaceship(terminalSize, terminalSize.getRows() - 1, " -/\\- ");
 
         int opponentDirection = 0;
-        Spaceship opponent = new Spaceship(terminalSize, 0, " >-\\/-< ");
+        Spaceship opponent = new Spaceship(terminalSize, 1, " >-\\/-< ");
 
         Bullet playerBullet = null;
         Bullet opponentBullet = null;
